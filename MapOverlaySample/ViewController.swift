@@ -19,6 +19,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		getCountryData()
+		if let tur = allCountries["TUR"]?.features.first?.geometry {
+			for locations in tur.locations {
+				mapView.add(MKPolygon(coordinates: locations, count: locations.count))
+			}
+		}
+		
 	}
 	
 	func getCountryData() {
@@ -31,10 +37,23 @@ class ViewController: UIViewController, MKMapViewDelegate {
 		populateGeoData(datas)
 	}
 	
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		if overlay is MKPolygon {
+			let polygonView = MKPolygonRenderer(overlay: overlay)
+			polygonView.fillColor = UIColor.cocacolaRed(alpha: 1)
+			polygonView.strokeColor = UIColor.lightGray
+			polygonView.lineWidth = 5
+			return polygonView
+		}
+		return MKOverlayRenderer()
+	}
+	
 	func populateGeoData(_ datas: [Data]) {
 		for data in datas {
 			if let country = try? GeoModel(data: data) {
 				allCountries[(country.features.first?.id)!] = country
+			} else {
+				print("missin data index \(String(describing: datas.index(of: data)))")
 			}
 		}
 		print(allCountries.count)

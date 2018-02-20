@@ -186,6 +186,7 @@
 		E82792AE203C9A6C00EFEFE9 /* GRL.geo.json in Resources */ = {isa = PBXBuildFile; fileRef = E827853D203C9A6800EFEFE9 /* GRL.geo.json */; };
 		E82792AF203C9A6C00EFEFE9 /* CAN.geo.json in Resources */ = {isa = PBXBuildFile; fileRef = E827853E203C9A6800EFEFE9 /* CAN.geo.json */; };
 		E82792B1203C9BA300EFEFE9 /* GeoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82792B0203C9BA300EFEFE9 /* GeoModel.swift */; };
+		E82792B3203CC4DE00EFEFE9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82792B2203CC4DE00EFEFE9 /* Extensions.swift */; };
 		E88F96DC203C94A900271D8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88F96DB203C94A900271D8A /* AppDelegate.swift */; };
 		E88F96DE203C94A900271D8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88F96DD203C94A900271D8A /* ViewController.swift */; };
 		E88F96E1203C94A900271D8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88F96DF203C94A900271D8A /* Main.storyboard */; };
@@ -373,6 +374,7 @@
 		E827853D203C9A6800EFEFE9 /* GRL.geo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GRL.geo.json; sourceTree = "<group>"; };
 		E827853E203C9A6800EFEFE9 /* CAN.geo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CAN.geo.json; sourceTree = "<group>"; };
 		E82792B0203C9BA300EFEFE9 /* GeoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoModel.swift; sourceTree = "<group>"; };
+		E82792B2203CC4DE00EFEFE9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E88F96D8203C94A900271D8A /* MapOverlaySample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapOverlaySample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88F96DB203C94A900271D8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E88F96DD203C94A900271D8A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				E88F96DB203C94A900271D8A /* AppDelegate.swift */,
 				E88F96DD203C94A900271D8A /* ViewController.swift */,
 				E82792B0203C9BA300EFEFE9 /* GeoModel.swift */,
+				E82792B2203CC4DE00EFEFE9 /* Extensions.swift */,
 				E88F96DF203C94A900271D8A /* Main.storyboard */,
 				E88F96E2203C94A900271D8A /* Assets.xcassets */,
 				E88F96E4203C94A900271D8A /* LaunchScreen.storyboard */,
@@ -861,6 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E88F96DE203C94A900271D8A /* ViewController.swift in Sources */,
+				E82792B3203CC4DE00EFEFE9 /* Extensions.swift in Sources */,
 				E88F96DC203C94A900271D8A /* AppDelegate.swift in Sources */,
 				E82792B1203C9BA300EFEFE9 /* GeoModel.swift in Sources */,
 			);
