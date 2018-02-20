@@ -25,28 +25,25 @@ class GeoModel: Codable {
 }
 
 class Feature: Codable {
-	let type: String
-	let id: String
+	let type: FeatureType
 	let properties: Properties
 	let geometry: Geometry
 	
 	enum CodingKeys: String, CodingKey {
 		case type = "type"
-		case id = "id"
 		case properties = "properties"
 		case geometry = "geometry"
 	}
 	
-	init(type: String, id: String, properties: Properties, geometry: Geometry) {
+	init(type: FeatureType, properties: Properties, geometry: Geometry) {
 		self.type = type
-		self.id = id
 		self.properties = properties
 		self.geometry = geometry
 	}
 }
 
 class Geometry: Codable {
-	let type: String
+	let type: GeometryType
 	let coordinates: [[[Coordinate]]]
 	var locations: [[CLLocationCoordinate2D]] {
 		get {
@@ -87,46 +84,31 @@ class Geometry: Codable {
 			return locati
 		}
 	}
-	/*
 	
-	var locations: [[CLLocationCoordinate2D]] {
-	get {
-	var locati = [[CLLocationCoordinate2D]]()
-	for coordinate in coordinates {
-	var loca = [CLLocationCoordinate2D]()
-	for coor in coordinate {
-	loca.append(CLLocationCoordinate2D(latitude: coor.first!, longitude: coor.last!))
-	}
-	locati.append(loca)
-	}
-	return locati
-	}
-	}
 	
-	*/
 	enum CodingKeys: String, CodingKey {
 		case type = "type"
 		case coordinates = "coordinates"
 	}
 	
-	init(type: String, coordinates: [[[Coordinate]]]) {
+	init(type: GeometryType, coordinates: [[[Coordinate]]]) {
 		self.type = type
 		self.coordinates = coordinates
 	}
 }
 
 enum Coordinate: Codable {
-	case double(value: Double)
-	case doubleArray(values: [Double])
+	case double(Double)
+	case doubleArray([Double])
 	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()
 		if let x = try? container.decode(Double.self) {
-			self = .double(value: x)
+			self = .double(x)
 			return
 		}
 		if let x = try? container.decode([Double].self) {
-			self = .doubleArray(values: x)
+			self = .doubleArray(x)
 			return
 		}
 		throw DecodingError.typeMismatch(Coordinate.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Coordinate"))
@@ -143,16 +125,28 @@ enum Coordinate: Codable {
 	}
 }
 
+enum GeometryType: String, Codable {
+	case multiPolygon = "MultiPolygon"
+	case polygon = "Polygon"
+}
+
 class Properties: Codable {
 	let name: String
+	let id: String
 	
 	enum CodingKeys: String, CodingKey {
 		case name = "name"
+		case id = "id"
 	}
 	
-	init(name: String) {
+	init(name: String, id: String) {
 		self.name = name
+		self.id = id
 	}
+}
+
+enum FeatureType: String, Codable {
+	case feature = "Feature"
 }
 
 // MARK: Convenience initializers
@@ -186,7 +180,7 @@ extension GeoModel {
 extension Feature {
 	convenience init(data: Data) throws {
 		let me = try JSONDecoder().decode(Feature.self, from: data)
-		self.init(type: me.type, id: me.id, properties: me.properties, geometry: me.geometry)
+		self.init(type: me.type, properties: me.properties, geometry: me.geometry)
 	}
 	
 	convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -238,7 +232,7 @@ extension Geometry {
 extension Properties {
 	convenience init(data: Data) throws {
 		let me = try JSONDecoder().decode(Properties.self, from: data)
-		self.init(name: me.name)
+		self.init(name: me.name, id: me.id)
 	}
 	
 	convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -260,5 +254,7 @@ extension Properties {
 		return String(data: try self.jsonData(), encoding: encoding)
 	}
 }
+
+
 
 
