@@ -17,29 +17,28 @@ class ViewController: UIViewController, MKMapViewDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib. // allCountries["TUR"]?.features.first?.geometry
+
 		getCountryData()
 		
 		if let countries = allCountries {
 			
-//			for country in countries.features {
-//				for locations in country.geometry.locations {
-//					mapView.add(MKPolygon(coordinates: locations, count: locations.count))
-//				}
-//			}
-			// ""
-			if let c = countries.features.filter({ $0.properties.id == "SYR" }).first {
-				for locations in c.geometry.locations {
+			for country in countries.features {
+				for locations in country.geometry.locations {
 					mapView.add(MKPolygon(coordinates: locations, count: locations.count))
 				}
 			}
-		}
-		
-//		if let tur = allCoun{
-//			for locations in tur.locations {
-//				mapView.add(MKPolygon(coordinates: locations, count: locations.count))
+			// ""
+//			if let c = countries.features.filter({ $0.properties.id == "PAK" }).first {
+//				for locations in c.geometry.locations {
+//					mapView.add(MKPolygon(coordinates: locations, count: locations.count))
+//				}
 //			}
-//		}
+//			if let c = countries.features.filter({ $0.properties.id == "TUR" }).first {
+//				for locations in c.geometry.locations {
+//					mapView.add(MKPolygon(coordinates: locations, count: locations.count))
+//				}
+//			}
+		}
 		
 	}
 	
@@ -71,47 +70,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
 		print(allCountries?.features.count ?? 0)
 	}
 	
-	/*
-	var locations: [[CLLocationCoordinate2D]] {
-	get {
-	var locati = [[CLLocationCoordinate2D]]()
-	for coordinate in coordinates {
-	var loca = [CLLocationCoordinate2D]()
-	for coor in coordinate {
-	var lat: Double = 0
-	var lon: Double = 0
-	var flag = false
-	for index in 0..<coor.count {
-	switch coor[index] {
-	case .double(let value):
-	flag = true
-	switch index {
-	case 0:
-	lat = value
-	break
-	case 1:
-	lon = value
-	break
-	default: break
-	}
-	break
-	case .doubleArray(let values):
-	flag = false
-	loca.append(CLLocationCoordinate2D(latitude: values.last!, longitude: values.first!))
-	break
-	}
-	}
-	if flag {
-	loca.append(CLLocationCoordinate2D(latitude: lat, longitude: lon))
-	}
-	
-	}
-	locati.append(loca)
-	}
-	return locati
-	}
-	}
-	*/
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.

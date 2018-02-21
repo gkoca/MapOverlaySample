@@ -60,10 +60,10 @@ class Geometry: Codable {
 							flag = true
 							switch index {
 							case 0:
-								lat = value
+								lon = value
 								break
 							case 1:
-								lon = value
+								lat = value
 								break
 							default: break
 							}
